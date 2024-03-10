@@ -1,3 +1,0 @@
-str="HELLO"
-
-echo $str
