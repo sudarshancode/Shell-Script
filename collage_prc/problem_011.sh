@@ -2,24 +2,38 @@
 
 #!/bin/bash
 
-number=$1
+power(){
+    local num=$1;
+    local exp=$2;
+    result=1;
+    for ((i=0;i<$exp; i++))
+    do
+        result=$(($result * $num))
+    done
+    echo "$result";
+}
 
-orgin=$number;
-result=0
 
-while [ $orgin -ne  0 ]
-do
-	remainder=$(($orgin%10));
-
-	result=$(($result + $remainder * $remainder * $remainder ))
-	
-	orgin=$(($orgin/10))
-done
-
-if [ $number == $result ]
-then
-	echo "The number is armstrong"
-else
-	echo "The number is not armstrong"
-fi
+is_armstrong(){
+    num=$1;
+    num_digit=${#num};
+    temp=$num;
+    sum=0;
+    while [ $temp -gt 0 ]
+    do
+        digit=$(($temp%10));
+        temp=$(($temp/10));
+       sum=$(($sum + $(power $digit $num_digit))); 
+    done
+    
+    if [ $num -eq $sum ]
+    then
+        echo "The number is armstrong";
+    else
+        echo "The number is not armstrong";
+    fi
+    
+}
+read -p "Enter a number:" number;
+is_armstrong "$number"
 	
