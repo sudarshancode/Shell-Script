@@ -13,4 +13,11 @@ fi
 
 echo "comapre two files and list the dissimilarites :"
 
-diff "$file1" "$file2"
+diff_output=$(diff -b "$file1" "$file2")
+
+if [ -z "$diff_output" ]; then
+    echo "No differences found"
+else
+    echo "Differences found:"
+    echo "$diff_output"
+fi
